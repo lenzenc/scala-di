@@ -18,7 +18,11 @@ libraryDependencies ++= Seq(
   "com.typesafe"%"config"%"1.2.1",
   "org.specs2"%%"specs2"%"2.4"%"test",
   "com.h2database" % "h2" % "1.4.183",
-  "com.jolbox"%"bonecp"%"0.8.0.RELEASE"
+  "com.jolbox"%"bonecp"%"0.8.0.RELEASE",
+  "io.spray" %% "spray-can" % "1.3.2",
+  "io.spray" %% "spray-routing" % "1.3.2",
+  "io.spray" %% "spray-testkit" % "1.3.2",
+  "io.spray"%%"spray-json"%"1.3.1"
 )
 
 

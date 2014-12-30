@@ -1,13 +1,12 @@
 package com.company.tables.slick
 
+import com.company.config.database.slick.profile.DatabaseProfile
 import com.company.models.Customer
 
-import scala.slick.driver.JdbcProfile
-
-class CustomerTable(val driver: JdbcProfile) extends DataTable {
+trait CustomerTable { self: DatabaseProfile =>
   import profile.simple._
 
-  lazy val table = TableQuery[Customers]
+  def customers = TableQuery[Customers]
 
   class Customers(tag: Tag) extends Table[Customer](tag, "customers") {
     def id = column[Option[Long]]("id", O.PrimaryKey, O.AutoInc)
