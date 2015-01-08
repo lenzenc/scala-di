@@ -1,10 +1,10 @@
 package com.company.services
 
-import com.company.config.database.slick.DatabaseFactory
+import com.company.config.database.slick.SessionFactory
 import com.company.daos.UserDAOModule
 import com.company.models.User
 
-trait UserServiceModule { self: UserDAOModule with DatabaseFactory =>
+trait UserServiceModule { self: UserDAOModule with SessionFactory =>
 
   def userService: UserService
 
@@ -18,17 +18,9 @@ trait UserServiceModule { self: UserDAOModule with DatabaseFactory =>
 
   class UserServiceImpl extends UserService {
 
-    private lazy val db = database()
+    def list(customerID: Long): Seq[User] = inSession { implicit session => userDAO.findAllByCustomerID(customerID) }
 
-    def list(customerID: Long): Seq[User] = {
-      db.withSession { implicit session =>
-        userDAO.findAllByCustomerID(customerID)
-      }
-    }
-
-    def get(pk: Long): Option[User] = db.withSession { implicit session =>
-      userDAO.findByPK(pk)
-    }
+    def get(pk: Long): Option[User] = inSession { implicit session => userDAO.findByPK(pk) }
 
   }
 

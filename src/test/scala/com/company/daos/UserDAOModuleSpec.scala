@@ -1,7 +1,7 @@
 package com.company.daos
 
 import com.company.models.{Customer, User}
-import com.company.specs2.{DAOSpecScope, DAOSpec}
+import com.company.specs2.daos.{DAOSpec, DAOSpecScope}
 
 class UserDAOModuleSpec extends DAOSpec {
   import profile.simple._

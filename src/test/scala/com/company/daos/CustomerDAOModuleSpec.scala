@@ -2,7 +2,7 @@ package com.company.daos
 
 import com.company.SortOrder
 import com.company.models.Customer
-import com.company.specs2.{DAOSpecScope, DAOSpec}
+import com.company.specs2.daos.{DAOSpec, DAOSpecScope}
 
 class CustomerDAOModuleSpec extends DAOSpec {
   import profile.simple._

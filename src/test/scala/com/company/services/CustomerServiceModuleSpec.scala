@@ -4,7 +4,7 @@ import com.company.SortOrder
 import com.company.context.Tables
 import com.company.daos.CustomerDAOModule
 import com.company.models.Customer
-import com.company.specs2.{ServiceSpecScope, ServiceSpec}
+import com.company.specs2.services.{ServiceSpecScope, ServiceSpec}
 
 class CustomerServiceModuleSpec extends ServiceSpec {
 

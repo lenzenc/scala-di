@@ -1,7 +1,8 @@
-package com.company.specs2
+package com.company.specs2.daos
 
 import com.company.config.database.slick.profile.DatabaseProfile
 import com.company.context.Tables
+import com.company.specs2.SpecScope
 
 import scala.slick.driver.{H2Driver, JdbcProfile}
 

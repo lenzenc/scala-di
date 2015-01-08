@@ -1,12 +1,11 @@
 package com.company.services
 
-import com.company.config.database.slick.DatabaseFactory
+import com.company.config.database.slick.SessionFactory
 import com.company.daos.CustomerDAOModule
 import com.company.models.Customer
 import com.company.SortOrder
-import com.company.SortOrder._
 
-trait CustomerServiceModule { self: CustomerDAOModule with DatabaseFactory =>
+trait CustomerServiceModule { self: CustomerDAOModule with SessionFactory =>
 
   def customerService: CustomerService
 
@@ -20,13 +19,11 @@ trait CustomerServiceModule { self: CustomerDAOModule with DatabaseFactory =>
 
   class CustomerServiceImpl() extends  CustomerService {
 
-    private lazy val db = database()
-
-    def list: Seq[Customer] = db.withSession { implicit session =>
-        customerDAO.findAll(SortOrder.ASC)
+    def list: Seq[Customer] = inSession { implicit session =>
+      customerDAO.findAll(SortOrder.ASC)
     }
 
-    def get(pk: Long): Option[Customer] = db.withSession { implicit session =>
+    def get(pk: Long): Option[Customer] = inSession { implicit session =>
       customerDAO.findByPK(pk)
     }
 
