@@ -22,7 +22,7 @@ trait CustomerDAOModule { self: CustomerTable with DatabaseProfile =>
   class CustomerDAOImpl extends CustomerDAO {
 
     def findAll(sortOrder: SortOrder = SortOrder.ASC)(implicit s: Session): Seq[Customer] = {
-      customers.sortBy(
+      customersTable.sortBy(
         sortOrder match {
           case SortOrder.ASC => _.name.asc
           case SortOrder.DESC => _.name.desc
@@ -30,7 +30,7 @@ trait CustomerDAOModule { self: CustomerTable with DatabaseProfile =>
       ).list
     }
 
-    def findByPK(pk: Long)(implicit s: Session): Option[Customer] = customers.filter(_.id === pk).firstOption
+    def findByPK(pk: Long)(implicit s: Session): Option[Customer] = customersTable.filter(_.id === pk).firstOption
 
   }
 

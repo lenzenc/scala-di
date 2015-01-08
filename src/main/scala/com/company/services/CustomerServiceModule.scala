@@ -12,7 +12,7 @@ trait CustomerServiceModule { self: CustomerDAOModule with DatabaseFactory =>
 
   trait CustomerService {
 
-    def list(sortOrder: SortOrder = SortOrder.ASC): Seq[Customer]
+    def list: Seq[Customer]
 
     def get(pk: Long): Option[Customer]
 
@@ -22,8 +22,8 @@ trait CustomerServiceModule { self: CustomerDAOModule with DatabaseFactory =>
 
     private lazy val db = database()
 
-    def list(sortOrder: SortOrder = SortOrder.ASC): Seq[Customer] = db.withSession {
-      implicit session => customerDAO.findAll(sortOrder)
+    def list: Seq[Customer] = db.withSession { implicit session =>
+        customerDAO.findAll(SortOrder.ASC)
     }
 
     def get(pk: Long): Option[Customer] = db.withSession { implicit session =>

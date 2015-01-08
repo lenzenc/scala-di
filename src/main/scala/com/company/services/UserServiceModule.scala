@@ -27,7 +27,7 @@ trait UserServiceModule { self: UserDAOModule with DatabaseFactory =>
     }
 
     def get(pk: Long): Option[User] = db.withSession { implicit session =>
-      userDAO.findByPk(pk)
+      userDAO.findByPK(pk)
     }
 
   }

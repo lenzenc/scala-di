@@ -12,7 +12,7 @@ trait CustomerAPIModule { self: CustomerServiceModule =>
       get {
         path("customers") {
           complete {
-            customerService.list()
+            customerService.list
           }
         } ~
         path("customers" / LongNumber) { pk =>

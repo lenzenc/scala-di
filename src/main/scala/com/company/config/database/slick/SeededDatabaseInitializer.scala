@@ -5,11 +5,11 @@ import com.company.models.{User, Customer}
 trait SeededDatabaseInitializer extends DatabaseInitializer with DatabaseFactory {
   import profile.simple._
 
-  val customersAutoInc = customers returning customers.map(_.id) into {
+  val customersAutoInc = customersTable returning customersTable.map(_.id) into {
     case (c, id) => c.copy(id = id)
   }
 
-  val usersAutoInc = users returning users.map(_.id) into {
+  val usersAutoInc = usersTable returning usersTable.map(_.id) into {
     case (u, id) => u.copy(id = id)
   }
 

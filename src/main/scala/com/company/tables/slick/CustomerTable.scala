@@ -6,7 +6,7 @@ import com.company.models.Customer
 trait CustomerTable { self: DatabaseProfile =>
   import profile.simple._
 
-  def customers = TableQuery[Customers]
+  def customersTable = TableQuery[Customers]
 
   class Customers(tag: Tag) extends Table[Customer](tag, "customers") {
     def id = column[Option[Long]]("id", O.PrimaryKey, O.AutoInc)

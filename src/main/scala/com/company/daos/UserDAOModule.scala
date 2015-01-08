@@ -13,16 +13,16 @@ trait UserDAOModule { self: UserTable with DatabaseProfile =>
 
     def findAllByCustomerID(customerID: Long)(implicit s: Session): Seq[User]
 
-    def findByPk(pk: Long)(implicit session: Session): Option[User]
+    def findByPK(pk: Long)(implicit session: Session): Option[User]
   }
 
   class UserDAOImpl extends UserDAO {
 
     def findAllByCustomerID(customerID: Long)(implicit s: Session): Seq[User] = {
-      users.filter(_.customerID === customerID).list
+      usersTable.filter(_.customerID === customerID).list
     }
 
-    def findByPk(pk: Long)(implicit session: Session): Option[User] = users.filter(_.id === pk).firstOption
+    def findByPK(pk: Long)(implicit session: Session): Option[User] = usersTable.filter(_.id === pk).firstOption
 
   }
 
