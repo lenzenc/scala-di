@@ -11,14 +11,14 @@ trait UserDAOModule { self: UserTable with DatabaseProfile =>
 
   trait UserDAO {
 
-    def findAllByCustomerID(customerID: Long)(implicit s: Session): Seq[User]
+    def findAllByCustomerID(customerID: Long)(implicit s: Session): List[User]
 
     def findByPK(pk: Long)(implicit session: Session): Option[User]
   }
 
   class UserDAOImpl extends UserDAO {
 
-    def findAllByCustomerID(customerID: Long)(implicit s: Session): Seq[User] = {
+    def findAllByCustomerID(customerID: Long)(implicit s: Session): List[User] = {
       usersTable.filter(_.customerID === customerID).list
     }
 

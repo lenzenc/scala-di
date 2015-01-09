@@ -17,7 +17,7 @@ class UserServiceModuleSpec extends ServiceSpec {
   ".list(customerID: Long)" should {
 
     "return a list of expected Users for a given customerID" in new MainScope {
-      val userList = Seq(User("Bob", "Smith", 1, Some(1)))
+      val userList = List(User("Bob", "Smith", 1, Some(1)))
       userDAO.findAllByCustomerID(1) returns userList
       val users = userService.list(1)
       there was one(userDAO).findAllByCustomerID(1)
@@ -25,7 +25,7 @@ class UserServiceModuleSpec extends ServiceSpec {
     }
 
     "return an empty list of Users if there are no Users for a given customerID" in new MainScope {
-      val userList = Seq()
+      val userList = List()
       userDAO.findAllByCustomerID(1) returns userList
       val users = userService.list(1)
       there was one(userDAO).findAllByCustomerID(1)

@@ -11,7 +11,7 @@ trait CustomerServiceModule { self: CustomerDAOModule with SessionFactory =>
 
   trait CustomerService {
 
-    def list: Seq[Customer]
+    def list: List[Customer]
 
     def get(pk: Long): Option[Customer]
 
@@ -19,7 +19,7 @@ trait CustomerServiceModule { self: CustomerDAOModule with SessionFactory =>
 
   class CustomerServiceImpl() extends  CustomerService {
 
-    def list: Seq[Customer] = inSession { implicit session =>
+    def list: List[Customer] = inSession { implicit session =>
       customerDAO.findAll(SortOrder.ASC)
     }
 

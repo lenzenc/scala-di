@@ -10,7 +10,7 @@ trait UserServiceModule { self: UserDAOModule with SessionFactory =>
 
   trait UserService {
 
-    def list(customerID: Long): Seq[User]
+    def list(customerID: Long): List[User]
 
     def get(pk: Long): Option[User]
 
@@ -18,7 +18,7 @@ trait UserServiceModule { self: UserDAOModule with SessionFactory =>
 
   class UserServiceImpl extends UserService {
 
-    def list(customerID: Long): Seq[User] = inSession { implicit session => userDAO.findAllByCustomerID(customerID) }
+    def list(customerID: Long): List[User] = inSession { implicit session => userDAO.findAllByCustomerID(customerID) }
 
     def get(pk: Long): Option[User] = inSession { implicit session => userDAO.findByPK(pk) }
 

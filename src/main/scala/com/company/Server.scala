@@ -5,9 +5,7 @@ import com.company.models.{User, Customer}
 import spray.routing.Route
 
 object Server extends App with HttpBoot {
-
-  // TODO: Switch all Seq to List
-  // TODO: Add Remaining unit tests for services
+  
   // TODO: Create unit tests for HTTP/Controller classes
   // TODO: Add reusable ID table logic
   // TODO: Add reusable create/update date table logic

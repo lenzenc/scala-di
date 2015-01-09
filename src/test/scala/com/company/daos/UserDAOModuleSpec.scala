@@ -38,7 +38,7 @@ class UserDAOModuleSpec extends DAOSpec {
 
     }
 
-    "return empty Seq if not customers are found for a given customer ID" in new MainScope with Users {
+    "return empty List if not customers are found for a given customer ID" in new MainScope with Users {
 
       val users = userDAO.findAllByCustomerID(-1)
       users must not(beNull)

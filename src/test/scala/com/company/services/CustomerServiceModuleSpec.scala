@@ -18,7 +18,7 @@ class CustomerServiceModuleSpec extends ServiceSpec {
   ".list" should {
 
     "return a list of expected customers" in new MainScope {
-      val customerList = Seq(Customer("Customer A", Some(1)))
+      val customerList = List(Customer("Customer A", Some(1)))
       customerDAO.findAll(SortOrder.ASC) returns customerList
       val customers = customerService.list
       there was one(customerDAO).findAll(SortOrder.ASC)

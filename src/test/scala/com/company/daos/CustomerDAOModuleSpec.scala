@@ -14,7 +14,7 @@ class CustomerDAOModuleSpec extends DAOSpec {
   }
 
   trait UnOrderedCustomers {
-    customersTable ++= Seq(
+    customersTable ++= List(
       Customer("Customer B"),
       Customer("Customer A"),
       Customer("Customer C")
