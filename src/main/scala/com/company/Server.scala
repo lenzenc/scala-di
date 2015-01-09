@@ -13,6 +13,7 @@ object Server extends App with HttpBoot {
   // TODO: Create reusable insert that copied auto-generated identify back into inserted model
   // TODO: Make sure all needed classes/traits can be re-used and extended in other projects
   // TODO: Add better error handling for the user case where a model is not found for a given identifier
+  // TODO: Add support for https://github.com/brettwooldridge/HikariCP DataSources
 
   lazy val app = new Application {
     import profile.simple._
