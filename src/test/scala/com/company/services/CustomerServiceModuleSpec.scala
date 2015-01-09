@@ -27,4 +27,23 @@ class CustomerServiceModuleSpec extends ServiceSpec {
 
   }
 
+  ".get(pk: Long)" should {
+
+    "return a Customer for a given customerID" in new MainScope {
+      val expectedCustomer = Customer("Customer A", Some(1))
+      customerDAO.findByPK(1) returns Some(expectedCustomer)
+      val customer = customerService.get(1)
+      there was one(customerDAO).findByPK(1)
+      customer.get must_== expectedCustomer
+    }
+
+    "return None if no Customer exists for a given customerID" in new MainScope {
+      customerDAO.findByPK(1) returns None
+      val customer = customerService.get(1)
+      there was one(customerDAO).findByPK(1)
+      customer must beNone
+    }
+
+  }
+
 }
