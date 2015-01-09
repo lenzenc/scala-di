@@ -25,6 +25,7 @@ libraryDependencies ++= Seq(
   "io.spray"%%"spray-json"%"1.3.1"
 )
 
+(testOptions in Test) += Tests.Argument(TestFrameworks.Specs2, "html", "console")
 
 Revolver.settings
     
