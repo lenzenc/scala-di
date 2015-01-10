@@ -1,14 +1,14 @@
 package com.company.services
 
 import com.company.SortOrder
-import com.company.context.Tables
+import com.company.context.TablesModule
 import com.company.daos.CustomerDAOModule
 import com.company.models.Customer
 import com.company.specs2.services.{ServiceSpecScope, ServiceSpec}
 
 class CustomerServiceModuleSpec extends ServiceSpec {
 
-  trait MainScope extends ServiceSpecScope with CustomerServiceModule with CustomerDAOModule with Tables {
+  trait MainScope extends ServiceSpecScope with CustomerServiceModule with CustomerDAOModule with TablesModule {
 
     val customerDAO: CustomerDAO = mock[CustomerDAO]
     val customerService = new CustomerServiceImpl

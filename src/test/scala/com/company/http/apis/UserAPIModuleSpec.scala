@@ -1,6 +1,6 @@
 package com.company.http.apis
 
-import com.company.context.DAOs
+import com.company.context.DAOsModule
 import com.company.models.{Customer, User}
 import com.company.services.UserServiceModule
 import com.company.specs2.http.apis.{APISpecScope, APISpec}
@@ -8,7 +8,7 @@ import spray.http.StatusCodes._
 
 class UserAPIModuleSpec extends APISpec {
 
-  trait MainScope extends APISpecScope with UserAPIModule with UserServiceModule with DAOs {
+  trait MainScope extends APISpecScope with UserAPIModule with UserServiceModule with DAOsModule {
 
     val userService = mock[UserService]
 

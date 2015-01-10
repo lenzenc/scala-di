@@ -1,7 +1,7 @@
 package com.company.specs2.daos
 
 import com.company.config.database.slick.profile.DatabaseProfile
-import com.company.context.Tables
+import com.company.context.TablesModule
 import com.company.specs2.SpecSessionFactory
 import org.specs2.execute.{AsResult, Result}
 import org.specs2.mock.Mockito
@@ -10,7 +10,7 @@ import org.specs2.specification.AroundExample
 
 trait DAOSpec
   extends Specification
-  with Tables
+  with TablesModule
   with Mockito
   with SpecSessionFactory
   with DatabaseProfile
