@@ -22,7 +22,9 @@ libraryDependencies ++= Seq(
   "io.spray" %% "spray-can" % "1.3.2",
   "io.spray" %% "spray-routing" % "1.3.2",
   "io.spray" %% "spray-testkit" % "1.3.2",
-  "io.spray"%%"spray-json"%"1.3.1"
+  "io.spray"%%"spray-json"%"1.3.1",
+  "joda-time" % "joda-time" % "2.6",
+  "org.joda" % "joda-convert" % "1.7"
 )
 
 (testOptions in Test) += Tests.Argument(TestFrameworks.Specs2, "html", "console")

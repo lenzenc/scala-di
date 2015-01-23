@@ -1,8 +1,10 @@
 package com.company.models
 
+import com.company.models.ModelSupport._
+
 case class User(
-  var firstName: String,
-  var lastName: String,
-  var customerID: Long,
-  var id: Option[Long] = None
- )
+  firstName: String,
+  lastName: String,
+  customerID: Long,
+  id: Option[Long] = None
+ ) extends Model[User]

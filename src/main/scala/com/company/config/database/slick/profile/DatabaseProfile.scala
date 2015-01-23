@@ -6,11 +6,11 @@ trait DatabaseProfile {
 
   protected def driver: JdbcProfile
 
-  protected lazy val profile = driver
+  protected lazy val profile: JdbcProfile = driver
 
 }
 
-trait H2DatabaseProfile {
+trait H2DatabaseProfile extends DatabaseProfile {
 
   protected def driver: JdbcProfile = H2Driver
 

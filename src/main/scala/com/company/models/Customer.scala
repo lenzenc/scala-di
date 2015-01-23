@@ -1,3 +1,5 @@
 package com.company.models
 
-case class Customer(var name: String, var id: Option[Long] = None)
+import com.company.models.ModelSupport._
+
+case class Customer(name: String, id: Option[Long] = None) extends Model[Customer]

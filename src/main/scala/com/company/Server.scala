@@ -19,11 +19,11 @@ object Server extends App with HttpBoot {
     import profile.simple._
 
     val customersAutoInc = customersTable returning customersTable.map(_.id) into {
-      case (c, id) => c.copy(id = id)
+      case (c, id) => c.copy(id = Some(id))
     }
 
     val usersAutoInc = usersTable returning usersTable.map(_.id) into {
-      case (u, id) => u.copy(id = id)
+      case (u, id) => u.copy(id = Some(id))
     }
 
     def initDB = {
