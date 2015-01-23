@@ -1,10 +1,9 @@
 package com.company.tables.slick
 
-import com.company.config.database.slick.Tables
 import com.company.config.database.slick.profile.DatabaseProfile
 import com.company.models.Customer
 
-trait CustomerTable extends Tables with TableSupport { self: DatabaseProfile =>
+trait CustomerTable extends TableSupport { self: DatabaseProfile =>
   import profile.simple._
 
   def customersTable = TableQuery[Customers]

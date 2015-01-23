@@ -13,11 +13,11 @@ trait UserTable extends TableSupport { self: CustomerTable with DatabaseProfile 
     val lastName = column[String]("last_name", O.NotNull, O.Length(255, varying = true))
     val customerID = column[Long]("customer_id", O.NotNull)
     def * = (firstName, lastName, customerID, id.?) <> (User.tupled, User.unapply _)
-//    def customerFK = foreignKey("USER_CUSTOMER_FK", customerID, customersTable)(
-//      r => r.id.get,
-//      onUpdate = ForeignKeyAction.NoAction,
-//      onDelete = ForeignKeyAction.NoAction
-//    )
+    def customerFK = foreignKey("USER_CUSTOMER_FK", customerID, customersTable)(
+      r => r.id,
+      onUpdate = ForeignKeyAction.NoAction,
+      onDelete = ForeignKeyAction.NoAction
+    )
   }
 
 }
