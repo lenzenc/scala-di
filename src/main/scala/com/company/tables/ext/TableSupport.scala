@@ -1,4 +1,4 @@
-package com.company.tables.slick
+package com.company.tables.ext
 
 import com.company.config.database.slick.profile.DatabaseProfile
 import com.company.models.ModelSupport._

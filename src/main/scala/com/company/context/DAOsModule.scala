@@ -1,11 +1,12 @@
 package com.company.context
 
 import com.company.config.database.slick.profile.DatabaseProfile
-import com.company.daos.{CustomerDAOModule, UserDAOModule}
+import com.company.daos.{CustomerDAO, UserDAO}
+import com.company.daos.impl.{UserDAOImpl, CustomerDAOImpl}
 
-trait DAOsModule extends CustomerDAOModule with UserDAOModule with TablesModule with DatabaseProfile {
+trait DAOsModule extends TablesModule with DatabaseProfile {
 
-  lazy val customerDAO: CustomerDAO = new CustomerDAOImpl
-  lazy val userDAO: UserDAO = new UserDAOImpl
+  implicit protected lazy val customerDAO: CustomerDAO = new CustomerDAOImpl
+  implicit protected lazy val userDAO: UserDAO = new UserDAOImpl
 
 }

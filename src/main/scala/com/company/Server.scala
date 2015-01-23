@@ -1,5 +1,7 @@
 package com.company
 
+import com.company.config.database.slick.ConfigSessionFactory
+import com.company.config.database.slick.profile.H2DatabaseProfile
 import com.company.http.HttpBoot
 import com.company.models.{User, Customer}
 import spray.routing.Route
@@ -15,7 +17,10 @@ object Server extends App with HttpBoot {
   // TODO: Add better error handling for the user case where a model is not found for a given identifier
   // TODO: Add support for https://github.com/brettwooldridge/HikariCP DataSources
 
-  lazy val app = new Application {
+  lazy val app = new Application with ConfigSessionFactory with H2DatabaseProfile {
+
+    implicit lazy val sessionFactory: SessionFactory =
+
     import profile.simple._
 
     val customersAutoInc = customersTable returning customersTable.map(_.id) into {

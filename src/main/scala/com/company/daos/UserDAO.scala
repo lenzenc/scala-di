@@ -2,8 +2,9 @@ package com.company.daos
 
 import com.company.models.User
 
-trait UserDAO extends DAO {
-  import profile.simple._
+import scala.slick.jdbc.JdbcBackend
+
+trait UserDAO { self: JdbcBackend =>
 
   def findAllByCustomerID(customerID: Long)(implicit s: Session): List[User]
 
