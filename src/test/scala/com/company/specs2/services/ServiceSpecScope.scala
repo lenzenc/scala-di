@@ -1,6 +1,6 @@
 package com.company.specs2.services
 
-import com.company.config.database.slick.profile.DatabaseProfile
+import com.company.config.database.DatabaseProfile
 import com.company.specs2.{MockedSessionFactory, SpecScope}
 import org.specs2.mock.Mockito
 

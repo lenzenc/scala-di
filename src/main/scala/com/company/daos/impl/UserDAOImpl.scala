@@ -1,25 +1,23 @@
 package com.company.daos.impl
 
+import com.company.config.database.DBProfile
 import com.company.daos.UserDAO
 import com.company.models.User
+import com.company.tables.UsersTable
 
 import scala.slick.driver.JdbcProfile
 
-class UserDAOImpl(implicit val driver: JdbcProfile) extends UserDAO {
+class UserDAOImpl(
+  implicit val driver: JdbcProfile,
+  implicit val usersTable: UsersTable)
+  extends UserDAO with DBProfile
+{
   import profile.simple._
 
-  def usersTable = TableQuery[Users]
+  def findAllByCustomerID(customerID: Long)(implicit s: Session): List[User] = {
+    usersTable.query.filter(_.customerID === customerID).list
+  }
 
-//  class Users(tag: Tag) extends ModelTable[User](tag, "users") {
-//    val firstName = column[String]("first_name", O.NotNull, O.Length(255, varying = true))
-//    val lastName = column[String]("last_name", O.NotNull, O.Length(255, varying = true))
-//    val customerID = column[Long]("customer_id", O.NotNull)
-//    def * = (firstName, lastName, customerID, id.?) <> (User.tupled, User.unapply _)
-//    def customerFK = foreignKey("USER_CUSTOMER_FK", customerID, customersTable)(
-//      r => r.id,
-//      onUpdate = ForeignKeyAction.NoAction,
-//      onDelete = ForeignKeyAction.NoAction
-//    )
-//  }
+  def findByPK(pk: Long)(implicit session: Session): Option[User] = usersTable.query.filter(_.id === pk).firstOption
 
 }

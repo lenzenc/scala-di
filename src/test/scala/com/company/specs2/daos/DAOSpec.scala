@@ -1,6 +1,6 @@
 package com.company.specs2.daos
 
-import com.company.config.database.slick.profile.DatabaseProfile
+import com.company.config.database.DatabaseProfile
 import com.company.context.TablesModule
 import com.company.specs2.SpecSessionFactory
 import org.specs2.execute.{AsResult, Result}

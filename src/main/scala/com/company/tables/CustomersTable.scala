@@ -1,13 +1,14 @@
 package com.company.tables
 
+import com.company.config.database.DBProfile
 import com.company.models.Customer
 
 import scala.slick.driver.JdbcProfile
 
-class CustomersTable(implicit val driver: JdbcProfile) extends Table {
+class CustomersTable(implicit val driver: JdbcProfile) extends ModelTable with DBProfile {
   import profile.simple._
 
-  private class Customers(tag: Tag) extends ModelTable[Customer](tag, "customers") {
+  class Customers(tag: Tag) extends AbstractModelTable[Customer](tag, "customers") {
     def name = column[String]("name", O.NotNull, O.Length(255, true))
     def * = (name, id.?) <> (Customer.tupled, Customer.unapply _)
   }

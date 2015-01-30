@@ -1,13 +1,18 @@
 package com.company.tables
 
+import com.company.config.database.DBProfile
 import com.company.models.User
 
 import scala.slick.driver.JdbcProfile
 
-class UsersTable(implicit val customersTable: CustomersTable, implicit val driver: JdbcProfile) extends Table {
+class UsersTable(
+  implicit val customersTable: CustomersTable,
+  implicit val driver: JdbcProfile)
+  extends ModelTable with DBProfile
+{
   import profile.simple._
 
-  private class Users(tag: Tag) extends ModelTable[User](tag, "users") {
+  class Users(tag: Tag) extends AbstractModelTable[User](tag, "users") {
     val firstName = column[String]("first_name", O.NotNull, O.Length(255, varying = true))
     val lastName = column[String]("last_name", O.NotNull, O.Length(255, varying = true))
     val customerID = column[Long]("customer_id", O.NotNull)

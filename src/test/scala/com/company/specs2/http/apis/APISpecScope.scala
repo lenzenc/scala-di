@@ -1,6 +1,6 @@
 package com.company.specs2.http.apis
 
-import com.company.config.database.slick.profile.DatabaseProfile
+import com.company.config.database.DatabaseProfile
 import com.company.http.JsonImplicits
 import com.company.specs2.{MockedSessionFactory, SpecScope}
 

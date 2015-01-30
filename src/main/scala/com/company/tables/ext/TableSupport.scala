@@ -1,9 +1,9 @@
 package com.company.tables.ext
 
-import com.company.config.database.slick.profile.DatabaseProfile
+import com.company.config.database.DBProfile
 import com.company.models.ModelSupport._
 
-trait TableSupport { self: DatabaseProfile =>
+trait TableSupport { self: DBProfile =>
   import profile.simple._
 
   trait IDColumn[ID] { self: Table[_] =>
@@ -15,7 +15,7 @@ trait TableSupport { self: DatabaseProfile =>
 
   }
 
-  abstract class ModelTable[M <: Identifiable[M]](
+  abstract class AbstractModelTable[M <: Identifiable[M]](
     tag: Tag,
     schemaName: Option[String],
     tableName: String)(implicit val idColType: BaseColumnType[M#IdType])

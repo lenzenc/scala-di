@@ -1,5 +1,7 @@
 package com.company.context
 
-trait AppModule extends APIsModule with ServicesModules {
+import com.company.config.database.{DBProfile, DB}
+
+trait AppModule extends APIsModule with ServicesModules { this: DB with DBProfile =>
 
 }

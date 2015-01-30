@@ -1,10 +1,10 @@
 package com.company.daos
 
+import com.company.config.database.DBProfile
 import com.company.models.User
 
-import scala.slick.jdbc.JdbcBackend
-
-trait UserDAO { self: JdbcBackend =>
+trait UserDAO extends DAO { this: DBProfile =>
+  import profile.simple._
 
   def findAllByCustomerID(customerID: Long)(implicit s: Session): List[User]
 

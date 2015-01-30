@@ -1,12 +1,10 @@
 package com.company
 
-import com.company.config.Configuration
-import com.company.config.database.slick.{SessionFactory, ConfigSessionFactory}
-import com.company.config.database.slick.profile.{DatabaseProfile, H2DatabaseProfile}
+import com.company.config.database._
 import com.company.context.AppModule
 
-trait Application extends AppModule with SessionFactory with DatabaseProfile {
+trait Application extends AppModule with DB with H2DBProfile {
 
-//  override def configuration = Configuration.load
+  protected implicit lazy val sessionFactory: SessionFactory = new ConfigSessionFactory(driver)
 
 }

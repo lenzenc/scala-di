@@ -2,6 +2,7 @@ package com.company.daos.impl
 
 import com.company.SortOrder
 import com.company.SortOrder._
+import com.company.config.database.DBProfile
 import com.company.daos.CustomerDAO
 import com.company.models.Customer
 import com.company.tables.CustomersTable
@@ -11,7 +12,7 @@ import scala.slick.driver.JdbcProfile
 class CustomerDAOImpl(
   implicit val customersTable: CustomersTable,
   implicit val driver: JdbcProfile)
-  extends CustomerDAO
+  extends CustomerDAO with DBProfile
 {
   import profile.simple._
 
