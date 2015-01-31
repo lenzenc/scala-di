@@ -1,12 +1,13 @@
-package com.company.daos
+package com.company.daos.impl
 
+import com.company.daos.UserDAO
 import com.company.models.{Customer, User}
 import com.company.specs2.daos.{DAOSpec, DAOSpecScope}
 
-class UserDAOModuleSpec extends DAOSpec {
+class UserDAOImplSpec extends DAOSpec {
   import profile.simple._
 
-  trait MainScope extends DAOSpecScope with UserDAOModule {
+  trait MainScope extends DAOSpecScope {
 
     val userDAO: UserDAO = new UserDAOImpl
 
@@ -16,9 +17,9 @@ class UserDAOModuleSpec extends DAOSpec {
 
     val customerA = Customer("Customer A", Some(1))
     val customerB = Customer("Customer B", Some(2))
-    customersTable.forceInsertAll(customerA, customerB)
+    customersTable.query.forceInsertAll(customerA, customerB)
     val bobSmith = User("Bob", "Smith", customerA.id.get, Some(1))
-    usersTable.forceInsertAll(
+    usersTable.query.forceInsertAll(
       bobSmith,
       User("Joe", "Blow", customerB.id.get, Some(2)),
       User("Henry", "Bar", customerA.id.get, Some(3)),

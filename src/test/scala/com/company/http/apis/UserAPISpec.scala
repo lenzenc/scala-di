@@ -1,16 +1,16 @@
 package com.company.http.apis
 
-import com.company.context.DAOsModule
 import com.company.models.{Customer, User}
-import com.company.services.UserServiceModule
+import com.company.services.UserService
 import com.company.specs2.http.apis.{APISpecScope, APISpec}
 import spray.http.StatusCodes._
 
-class UserAPIModuleSpec extends APISpec {
+class UserAPISpec extends APISpec {
 
-  trait MainScope extends APISpecScope with UserAPIModule with UserServiceModule with DAOsModule {
+  trait MainScope extends APISpecScope {
 
-    val userService = mock[UserService]
+    implicit val userService = mock[UserService]
+    val api = new UserAPI
 
   }
 
@@ -21,7 +21,7 @@ class UserAPIModuleSpec extends APISpec {
       val users = List(User("Bob", "Smith", customer.id.get, Some(5)))
       userService.list(customer.id.get) returns users
 
-      Get("/users?customerID=" + customer.id.get) ~> UserAPI.routes ~> check {
+      Get("/users?customerID=" + customer.id.get) ~> api.routes ~> check {
         there was one(userService).list(customer.id.get)
         status must_== OK
         responseAs[List[User]] must_== users
@@ -32,7 +32,7 @@ class UserAPIModuleSpec extends APISpec {
       val users = List()
       userService.list(1) returns users
 
-      Get("/users?customerID=1") ~> UserAPI.routes ~> check {
+      Get("/users?customerID=1") ~> api.routes ~> check {
         there was one(userService).list(1)
         status must_== OK
         responseAs[List[User]] must beEmpty
@@ -48,7 +48,7 @@ class UserAPIModuleSpec extends APISpec {
       val user = User("Bob", "Smith", customer.id.get, Some(5))
       userService.get(user.id.get) returns Some(user)
 
-      Get("/users/" + user.id.get) ~> UserAPI.routes ~> check {
+      Get("/users/" + user.id.get) ~> api.routes ~> check {
         there was one(userService).get(user.id.get)
         status must_== OK
         responseAs[User] must_== user
@@ -58,7 +58,7 @@ class UserAPIModuleSpec extends APISpec {
     "return a 500 error if no user exists for a given pk" in new MainScope {
       userService.get(1) returns None
 
-      Get("/users/1") ~> UserAPI.routes ~> check {
+      Get("/users/1") ~> api.routes ~> check {
         there was one(userService).get(1)
         status must_== InternalServerError
       }

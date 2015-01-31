@@ -1,8 +1,7 @@
 package com.company.specs2.daos
 
-import com.company.config.database.DatabaseProfile
+import com.company.config.database.H2DB
 import com.company.context.TablesModule
-import com.company.specs2.SpecSessionFactory
 import org.specs2.execute.{AsResult, Result}
 import org.specs2.mock.Mockito
 import org.specs2.mutable.{Before, Specification}
@@ -12,19 +11,17 @@ trait DAOSpec
   extends Specification
   with TablesModule
   with Mockito
-  with SpecSessionFactory
-  with DatabaseProfile
   with Before
   with AroundExample
+  with H2DB
 {
   sequential
-  import profile.simple._
 
-  protected implicit lazy val session = createSession()
+  protected implicit lazy val session = sessionFactory.createSession()
 
   def before = {
-    try { tables.drop } catch { case _: Exception => true }
-    tables.create
+    dropTables
+    createTables
   }
 
   def around[T : AsResult](t: => T): Result = {

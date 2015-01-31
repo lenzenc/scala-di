@@ -3,7 +3,7 @@ package com.company.config.database
 trait SessionFactory { this: DBProfile =>
   import profile.simple._
 
-  protected val defaultDBName = "default"
+  val defaultDBName = "default"
 
   def createSession(databaseName: String = defaultDBName): Session = database(databaseName).createSession
 

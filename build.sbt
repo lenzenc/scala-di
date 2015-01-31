@@ -4,6 +4,10 @@ version := "1.0"
 
 scalaVersion := "2.11.4"
 
+scalacOptions := Seq("-unchecked", "-deprecation", "-encoding", "utf8", "-feature")
+
+//parallelExecution in Test := false
+
 resolvers ++= Seq(
   "Typesafe repository" at "http://repo.typesafe.com/typesafe/releases",
   "Sonatype Releases"  at "http://oss.sonatype.org/content/repositories/releases",
@@ -30,4 +34,6 @@ libraryDependencies ++= Seq(
 (testOptions in Test) += Tests.Argument(TestFrameworks.Specs2, "html", "console")
 
 Revolver.settings
+
+scalacOptions in Test ++= Seq("-Yrangepos")
     

@@ -14,7 +14,7 @@ object Server extends App with HttpBoot {
   // TODO: Make sure all needed classes/traits can be re-used and extended in other projects
   // TODO: Add better error handling for the user case where a model is not found for a given identifier
   // TODO: Add support for https://github.com/brettwooldridge/HikariCP DataSources
-  // TODO: protected val dataSourceFactory: DataSourceFactory = new BoneCPDataSourceFactory(configuration) in ConfigSessionFactory should be a mixin
+  // TODO: Add Integration tests for DAO specs and run those in serial instead of parellel while all others can run in parellel
 
   lazy val app = new Application {
 
