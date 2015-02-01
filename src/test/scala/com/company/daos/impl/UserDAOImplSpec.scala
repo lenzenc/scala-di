@@ -9,7 +9,7 @@ class UserDAOImplSpec extends DAOSpec {
 
   trait MainScope extends DAOSpecScope {
 
-    val userDAO: UserDAO = new UserDAOImpl
+    val userDAO: UserDAO = new UserDAOImpl(usersTable, driver)
 
   }
 

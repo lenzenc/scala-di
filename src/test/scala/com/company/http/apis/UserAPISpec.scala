@@ -9,8 +9,8 @@ class UserAPISpec extends APISpec {
 
   trait MainScope extends APISpecScope {
 
-    implicit val userService = mock[UserService]
-    val api = new UserAPI
+    val userService = mock[UserService]
+    val api = new UserAPI(userService)
 
   }
 

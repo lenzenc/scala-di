@@ -9,7 +9,7 @@ class CustomerDAOImplSpec extends DAOSpec {
 
   trait MainScope extends DAOSpecScope {
 
-    val customerDAO = new CustomerDAOImpl
+    val customerDAO = new CustomerDAOImpl(customersTable, driver)
 
   }
 

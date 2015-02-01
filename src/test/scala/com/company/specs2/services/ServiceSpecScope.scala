@@ -7,7 +7,7 @@ import scala.slick.driver.JdbcDriver
 
 trait ServiceSpecScope extends SpecScope with MockDB with Mockito {
 
-  protected implicit lazy val driver = JdbcDriver
+  protected lazy val driver = JdbcDriver
 
   protected implicit lazy val session = sessionFactory.createSession(sessionFactory.defaultDBName)
 

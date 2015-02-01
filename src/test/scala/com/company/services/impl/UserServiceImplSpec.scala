@@ -8,8 +8,8 @@ class UserServiceImplSpec extends ServiceSpec {
 
   trait MainScope extends ServiceSpecScope {
 
-    implicit val userDAO = mock[UserDAO]
-    val userService = new UserServiceImpl
+    val userDAO = mock[UserDAO]
+    val userService = new UserServiceImpl(userDAO, sessionFactory)
 
   }
 

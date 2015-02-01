@@ -17,7 +17,7 @@ trait DAOSpec
 {
   sequential
 
-  protected implicit lazy val session = sessionFactory.createSession()
+  implicit lazy val session = sessionFactory.createSession()
 
   def before = {
     dropTables
