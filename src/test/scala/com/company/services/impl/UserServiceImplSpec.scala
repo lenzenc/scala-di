@@ -1,16 +1,15 @@
-package com.company.services
+package com.company.services.impl
 
-import com.company.context.TablesModule
-import com.company.daos.UserDAOModule
+import com.company.daos.UserDAO
 import com.company.models.User
-import com.company.specs2.services.{ServiceSpecScope, ServiceSpec}
+import com.company.specs2.services.{ServiceSpec, ServiceSpecScope}
 
-class UserServiceModuleSpec extends ServiceSpec {
+class UserServiceImplSpec extends ServiceSpec {
 
-  trait MainScope extends ServiceSpecScope with UserServiceModule with UserDAOModule with TablesModule {
+  trait MainScope extends ServiceSpecScope {
 
     val userDAO = mock[UserDAO]
-    val userService = new UserServiceImpl
+    val userService = new UserServiceImpl(userDAO, sessionFactory)
 
   }
 

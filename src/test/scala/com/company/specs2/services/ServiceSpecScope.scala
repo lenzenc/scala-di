@@ -1,15 +1,14 @@
 package com.company.specs2.services
 
-import com.company.config.database.slick.profile.DatabaseProfile
-import com.company.specs2.{MockedSessionFactory, SpecScope}
+import com.company.specs2.{MockDB, SpecScope}
 import org.specs2.mock.Mockito
 
 import scala.slick.driver.JdbcDriver
 
-trait ServiceSpecScope extends SpecScope with MockedSessionFactory with DatabaseProfile with Mockito {
+trait ServiceSpecScope extends SpecScope with MockDB with Mockito {
 
   protected lazy val driver = JdbcDriver
 
-  protected implicit lazy val session = createSession(defaultDBName)
+  protected implicit lazy val session = sessionFactory.createSession(sessionFactory.defaultDBName)
 
 }

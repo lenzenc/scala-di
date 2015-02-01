@@ -1,20 +1,20 @@
-package com.company.daos
+package com.company.daos.impl
 
 import com.company.SortOrder
 import com.company.models.Customer
 import com.company.specs2.daos.{DAOSpec, DAOSpecScope}
 
-class CustomerDAOModuleSpec extends DAOSpec {
+class CustomerDAOImplSpec extends DAOSpec {
   import profile.simple._
 
-  trait MainScope extends DAOSpecScope with CustomerDAOModule {
+  trait MainScope extends DAOSpecScope {
 
-    val customerDAO = new CustomerDAOImpl
+    val customerDAO = new CustomerDAOImpl(customersTable, driver)
 
   }
 
   trait UnOrderedCustomers {
-    customersTable ++= List(
+    customersTable.query ++= List(
       Customer("Customer B"),
       Customer("Customer A"),
       Customer("Customer C")
@@ -49,7 +49,7 @@ class CustomerDAOModuleSpec extends DAOSpec {
     "return an Option containing the expected customer for the given PK" in new MainScope {
 
       val customerA = Customer("Customer A", Some(1))
-      customersTable.forceInsert(customerA)
+      customersTable.query.forceInsert(customerA)
 
       val customer = customerDAO.findByPK(customerA.id.get)
       customer must not(beNull)

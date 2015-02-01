@@ -1,16 +1,16 @@
 package com.company.http.apis
 
-import com.company.context.{DAOsModule, ServicesModules}
 import com.company.models.Customer
-import com.company.services.CustomerServiceModule
+import com.company.services.CustomerService
 import com.company.specs2.http.apis.{APISpecScope, APISpec}
 import spray.http.StatusCodes._
 
-class CustomerAPIModuleSpec extends APISpec {
+class CustomerAPISpec extends APISpec {
 
-  trait MainScope extends APISpecScope with CustomerAPIModule with CustomerServiceModule with DAOsModule {
+  trait MainScope extends APISpecScope {
 
     val customerService = mock[CustomerService]
+    val api = new CustomerAPI(customerService)
 
   }
 
@@ -20,7 +20,7 @@ class CustomerAPIModuleSpec extends APISpec {
       val customers = List(Customer("Customer A", Some(1)))
       customerService.list returns customers
 
-      Get("/customers") ~> CustomerAPI.routes ~> check {
+      Get("/customers") ~> api.routes ~> check {
         there was one(customerService).list
         status must_== OK
         responseAs[List[Customer]] must_== customers
@@ -35,7 +35,7 @@ class CustomerAPIModuleSpec extends APISpec {
       val customer = Customer("Customer A", Some(1))
       customerService.get(1) returns Some(customer)
 
-      Get("/customers/1") ~> CustomerAPI.routes ~> check {
+      Get("/customers/1") ~> api.routes ~> check {
         there was one(customerService).get(1)
         status must_== OK
         responseAs[Customer] must_== customer
@@ -45,7 +45,7 @@ class CustomerAPIModuleSpec extends APISpec {
     "return a 500 error if no customer exists for a given pk" in new MainScope {
       customerService.get(1) returns None
 
-      Get("/customers/1") ~> CustomerAPI.routes ~> check {
+      Get("/customers/1") ~> api.routes ~> check {
         there was one(customerService).get(1)
         status must_== InternalServerError
       }

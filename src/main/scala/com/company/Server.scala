@@ -14,32 +14,35 @@ object Server extends App with HttpBoot {
   // TODO: Make sure all needed classes/traits can be re-used and extended in other projects
   // TODO: Add better error handling for the user case where a model is not found for a given identifier
   // TODO: Add support for https://github.com/brettwooldridge/HikariCP DataSources
+  // TODO: Add Integration tests for DAO specs and run those in serial instead of parellel while all others can run in parellel
 
   lazy val app = new Application {
+
     import profile.simple._
+    import sessionFactory._
 
-    val customersAutoInc = customersTable returning customersTable.map(_.id) into {
-      case (c, id) => c.copy(id = Some(id))
-    }
-
-    val usersAutoInc = usersTable returning usersTable.map(_.id) into {
-      case (u, id) => u.copy(id = Some(id))
-    }
+//    val customersAutoInc = customersTable returning customersTable.map(_.id) into {
+//      case (c, id) => c.copy(id = Some(id))
+//    }
+//
+//    val usersAutoInc = usersTable returning usersTable.map(_.id) into {
+//      case (u, id) => u.copy(id = Some(id))
+//    }
 
     def initDB = {
 
       inSession { implicit session =>
 
-        tables.create
+        createTables
 
-        val customer1 = customersAutoInc.insert(Customer("Customer One"))
-        val customer2 = customersAutoInc.insert(Customer("Customer Two"))
-        val customer3 = customersAutoInc.insert(Customer("Customer Three"))
+        val customer1 = customersTable.query.insert(Customer("Customer One", Some(1)))
+        val customer2 = customersTable.query.insert(Customer("Customer Two", Some(2)))
+        val customer3 = customersTable.query.insert(Customer("Customer Three", Some(3)))
 
-        val user1 = usersAutoInc.insert(User("John", "Smith", customer1.id.get))
-        val user2 = usersAutoInc.insert(User("Bob", "Smith", customer1.id.get))
-        val user3 = usersAutoInc.insert(User("Joe", "Blow", customer2.id.get))
-        val user4 = usersAutoInc.insert(User("Steve", "Martin", customer3.id.get))
+        val user1 = usersTable.query.insert(User("John", "Smith", 1, Some(1)))
+        val user2 = usersTable.query.insert(User("Bob", "Smith", 1, Some(2)))
+        val user3 = usersTable.query.insert(User("Joe", "Blow", 2, Some(3)))
+        val user4 = usersTable.query.insert(User("Steve", "Martin", 3, Some(4)))
 
       }
 

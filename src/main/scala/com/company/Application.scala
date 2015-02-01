@@ -1,12 +1,18 @@
 package com.company
 
 import com.company.config.Configuration
-import com.company.config.database.slick.ConfigSessionFactory
-import com.company.config.database.slick.profile.H2DatabaseProfile
+import com.company.config.database._
+import com.company.config.database.ds.BoneCPDataSourceFactory
 import com.company.context.AppModule
 
-trait Application extends AppModule with ConfigSessionFactory with H2DatabaseProfile {
+trait Application extends AppModule with DB with H2DBProfile {
 
-  override def configuration = Configuration.load
+  lazy val config = Configuration.load
+  lazy val dataSourceFactory = new BoneCPDataSourceFactory(config)
+
+  protected lazy val sessionFactory: SessionFactory = new ConfigSessionFactory(
+    driver,
+    dataSourceFactory,
+    config)
 
 }

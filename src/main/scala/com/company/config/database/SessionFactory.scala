@@ -1,11 +1,9 @@
-package com.company.config.database.slick
+package com.company.config.database
 
-import com.company.config.database.slick.profile.DatabaseProfile
-
-trait SessionFactory { self: DatabaseProfile =>
+trait SessionFactory { this: DBProfile =>
   import profile.simple._
 
-  protected val defaultDBName = "default"
+  val defaultDBName = "default"
 
   def createSession(databaseName: String = defaultDBName): Session = database(databaseName).createSession
 

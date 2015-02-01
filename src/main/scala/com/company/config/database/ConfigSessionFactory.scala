@@ -1,14 +1,18 @@
-package com.company.config.database.slick
+package com.company.config.database
 
 import com.company.config.Configuration
 import com.company.config.database.ds.{BoneCPDataSourceFactory, DataSourceFactory}
-import com.company.config.database.slick.profile.DatabaseProfile
 
-trait ConfigSessionFactory extends SessionFactory { self: DatabaseProfile =>
+import scala.slick.driver.{H2Driver, JdbcProfile}
+
+class ConfigSessionFactory(
+  val driver: JdbcProfile,
+  val dataSourceFactory: DataSourceFactory,
+  val configuration: Configuration = Configuration.load)
+  extends SessionFactory with DBProfile
+{
   import profile.simple._
 
-  protected def configuration: Configuration = Configuration.load
-  protected val dataSourceFactory: DataSourceFactory = new BoneCPDataSourceFactory(configuration)
   private lazy val dbConfig = configuration.getConfig("db").getOrElse(Configuration.empty)
   protected val dbs: Set[String] = dbConfig.subKeys
   protected val databases: Map[String, Database] = dbs.map { dbName => (dbName, create(dbName)) }.toMap
