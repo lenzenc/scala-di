@@ -4,7 +4,7 @@ import com.company.http.JsonImplicits
 import com.company.services.UserService
 import spray.routing._
 
-class UserAPI(implicit val userService: UserService) extends Directives with JsonImplicits {
+class UserAPI(val userService: UserService) extends Directives with JsonImplicits {
 
   val routes: Route = {
     get {

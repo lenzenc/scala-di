@@ -5,7 +5,7 @@ import com.company.services.impl.{UserServiceImpl, CustomerServiceImpl}
 
 trait ServicesModules extends DAOsModule { this: DB with DBProfile =>
 
-  protected implicit lazy val customerService = new CustomerServiceImpl
-  protected implicit lazy val userService = new UserServiceImpl
+  protected lazy val customerService = new CustomerServiceImpl(customerDAO, sessionFactory)
+  protected lazy val userService = new UserServiceImpl(userDAO, sessionFactory)
 
 }

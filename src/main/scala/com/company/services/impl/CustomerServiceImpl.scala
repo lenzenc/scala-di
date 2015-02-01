@@ -7,8 +7,8 @@ import com.company.models.Customer
 import com.company.services.CustomerService
 
 class CustomerServiceImpl(
-  implicit val customerDAO: CustomerDAO,
-  implicit val sessionFactory: SessionFactory)
+  val customerDAO: CustomerDAO,
+  val sessionFactory: SessionFactory)
   extends CustomerService with DB
 {
 

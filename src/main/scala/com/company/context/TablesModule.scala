@@ -6,8 +6,8 @@ import com.company.tables.{UsersTable, CustomersTable}
 trait TablesModule { this: DBProfile =>
   import profile.simple._
 
-  protected implicit lazy val customersTable = new CustomersTable
-  protected implicit lazy val usersTable = new UsersTable
+  protected lazy val customersTable = new CustomersTable(driver)
+  protected lazy val usersTable = new UsersTable(customersTable, driver)
 
   private val tables = List(
     customersTable,

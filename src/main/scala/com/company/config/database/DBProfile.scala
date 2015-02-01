@@ -6,7 +6,7 @@ trait DBProfile {
 
   protected def driver: JdbcProfile
 
-  protected implicit lazy val profile: JdbcProfile = driver
+  protected lazy val profile: JdbcProfile = driver
 
 }
 

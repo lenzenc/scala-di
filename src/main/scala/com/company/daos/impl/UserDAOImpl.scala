@@ -8,8 +8,8 @@ import com.company.tables.UsersTable
 import scala.slick.driver.JdbcProfile
 
 class UserDAOImpl(
-  implicit val driver: JdbcProfile,
-  implicit val usersTable: UsersTable)
+  val usersTable: UsersTable,
+  val driver: JdbcProfile)
   extends UserDAO with DBProfile
 {
   import profile.simple._

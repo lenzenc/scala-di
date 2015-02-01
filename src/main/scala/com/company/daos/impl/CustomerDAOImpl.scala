@@ -10,8 +10,8 @@ import com.company.tables.CustomersTable
 import scala.slick.driver.JdbcProfile
 
 class CustomerDAOImpl(
-  implicit val customersTable: CustomersTable,
-  implicit val driver: JdbcProfile)
+  val customersTable: CustomersTable,
+  val driver: JdbcProfile)
   extends CustomerDAO with DBProfile
 {
   import profile.simple._

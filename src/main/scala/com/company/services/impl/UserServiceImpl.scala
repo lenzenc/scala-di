@@ -6,8 +6,8 @@ import com.company.models.User
 import com.company.services.UserService
 
 class UserServiceImpl(
-  implicit val userDAO: UserDAO,
-  implicit val sessionFactory: SessionFactory)
+  val userDAO: UserDAO,
+  val sessionFactory: SessionFactory)
   extends UserService with DB
 {
   import sessionFactory._

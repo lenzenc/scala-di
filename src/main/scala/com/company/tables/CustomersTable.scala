@@ -5,7 +5,7 @@ import com.company.models.Customer
 
 import scala.slick.driver.JdbcProfile
 
-class CustomersTable(implicit val driver: JdbcProfile) extends ModelTable with DBProfile {
+class CustomersTable(val driver: JdbcProfile) extends ModelTable with DBProfile {
   import profile.simple._
 
   class Customers(tag: Tag) extends AbstractModelTable[Customer](tag, "customers") {

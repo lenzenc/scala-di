@@ -6,8 +6,8 @@ import com.company.models.User
 import scala.slick.driver.JdbcProfile
 
 class UsersTable(
-  implicit val customersTable: CustomersTable,
-  implicit val driver: JdbcProfile)
+  val customersTable: CustomersTable,
+  val driver: JdbcProfile)
   extends ModelTable with DBProfile
 {
   import profile.simple._
