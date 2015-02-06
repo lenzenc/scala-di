@@ -23,3 +23,6 @@ In addition....
 You could certainly use DI frameworks, Spring, Guice, others but they all seem to go against the nature of the language and when it comes down to it DI is just an object that takes parameters and it is simple to wire those together with out needing a heavy weight DI container framework.
 
 If you really hate to wire together objects yourself then I would at least recommend using something light weight like [MacWire](https://github.com/adamw/macwire).
+
+## Update...
+In the end I found that using a combination of "Implicit" and "Normal" constructor di was the best approach. When you have use cases where a lot of classes need a component, in this case most table, daos and other need a Slick JdbcProfile, in those cases it seems natural to have them as implicit constructor parameters and then at a top level when you are wiring together classes you can set an implicit profile, much easier then passing it to many/many constructors.  Outside that if a class just needs a resource that is needed by a couple or no others then those should be just normal constructor parameters.
