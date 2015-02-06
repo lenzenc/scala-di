@@ -3,7 +3,9 @@ package com.company.specs2
 import com.company.config.database.{DBProfile, SessionFactory}
 import org.specs2.mock.Mockito
 
-class MockedSessionFactory extends SessionFactory with Mockito { self: DBProfile =>
+import scala.slick.driver.JdbcProfile
+
+class MockedSessionFactory(implicit val profile: JdbcProfile) extends SessionFactory with Mockito {
   import profile.simple._
 
   protected lazy val db = mock[Database]

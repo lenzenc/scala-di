@@ -6,10 +6,9 @@ import com.company.config.database.ds.{BoneCPDataSourceFactory, DataSourceFactor
 import scala.slick.driver.{H2Driver, JdbcProfile}
 
 class ConfigSessionFactory(
-  val driver: JdbcProfile,
   val dataSourceFactory: DataSourceFactory,
-  val configuration: Configuration = Configuration.load)
-  extends SessionFactory with DBProfile
+  val configuration: Configuration = Configuration.load)(implicit val profile: JdbcProfile)
+  extends SessionFactory
 {
   import profile.simple._
 

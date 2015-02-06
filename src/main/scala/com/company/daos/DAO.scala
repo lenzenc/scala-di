@@ -1,5 +1,7 @@
 package com.company.daos
 
-trait DAO {
+import com.company.config.database.DBProfile
+
+trait DAO extends DBProfile {
 
 }

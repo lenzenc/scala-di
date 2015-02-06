@@ -11,7 +11,6 @@ trait Application extends AppModule with DB with H2DBProfile {
   lazy val dataSourceFactory = new BoneCPDataSourceFactory(config)
 
   protected lazy val sessionFactory: SessionFactory = new ConfigSessionFactory(
-    driver,
     dataSourceFactory,
     config)
 

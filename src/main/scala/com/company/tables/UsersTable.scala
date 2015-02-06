@@ -1,15 +1,10 @@
 package com.company.tables
 
-import com.company.config.database.DBProfile
 import com.company.models.User
 
 import scala.slick.driver.JdbcProfile
 
-class UsersTable(
-  val customersTable: CustomersTable,
-  val driver: JdbcProfile)
-  extends ModelTable with DBProfile
-{
+class UsersTable(val customersTable: CustomersTable)(implicit val profile: JdbcProfile) extends ModelTable {
   import profile.simple._
 
   class Users(tag: Tag) extends AbstractModelTable[User](tag, "users") {

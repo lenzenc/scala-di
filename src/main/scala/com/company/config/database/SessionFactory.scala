@@ -1,6 +1,6 @@
 package com.company.config.database
 
-trait SessionFactory { this: DBProfile =>
+trait SessionFactory extends DBProfile {
   import profile.simple._
 
   val defaultDBName = "default"

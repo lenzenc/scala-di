@@ -3,11 +3,13 @@ package com.company.context
 import com.company.config.database.DBProfile
 import com.company.tables.{UsersTable, CustomersTable}
 
-trait TablesModule { this: DBProfile =>
+import scala.slick.driver.JdbcProfile
+
+trait TablesModule extends DBProfile {
   import profile.simple._
 
-  protected lazy val customersTable = new CustomersTable(driver)
-  protected lazy val usersTable = new UsersTable(customersTable, driver)
+  protected lazy val customersTable = new CustomersTable
+  protected lazy val usersTable = new UsersTable(customersTable)
 
   private val tables = List(
     customersTable,

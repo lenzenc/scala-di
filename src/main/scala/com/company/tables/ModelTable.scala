@@ -3,7 +3,7 @@ package com.company.tables
 import com.company.config.database.DBProfile
 import com.company.tables.ext.TableSupport
 
-trait ModelTable extends TableSupport { this: DBProfile =>
+trait ModelTable extends TableSupport with DBProfile {
   import profile.simple._
 
   def query: TableQuery[_ <: AbstractModelTable[_]]

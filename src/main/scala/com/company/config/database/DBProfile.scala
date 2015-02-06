@@ -4,14 +4,12 @@ import scala.slick.driver.{H2Driver, JdbcProfile}
 
 trait DBProfile {
 
-  protected def driver: JdbcProfile
-
-  protected lazy val profile: JdbcProfile = driver
+  protected implicit val profile: JdbcProfile
 
 }
 
 trait H2DBProfile extends DBProfile {
 
-  protected lazy val driver: JdbcProfile = H2Driver
+  protected implicit lazy val profile: JdbcProfile = H2Driver
 
 }

@@ -2,18 +2,13 @@ package com.company.daos.impl
 
 import com.company.SortOrder
 import com.company.SortOrder._
-import com.company.config.database.DBProfile
 import com.company.daos.CustomerDAO
 import com.company.models.Customer
 import com.company.tables.CustomersTable
 
 import scala.slick.driver.JdbcProfile
 
-class CustomerDAOImpl(
-  val customersTable: CustomersTable,
-  val driver: JdbcProfile)
-  extends CustomerDAO with DBProfile
-{
+class CustomerDAOImpl(val customersTable: CustomersTable)(implicit val profile: JdbcProfile) extends CustomerDAO {
   import profile.simple._
 
   def findAll(sortOrder: SortOrder = SortOrder.ASC)(implicit s: Session): List[Customer] = {
