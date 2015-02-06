@@ -10,7 +10,7 @@ class CustomerServiceImplSpec extends ServiceSpec {
   trait MainScope extends ServiceSpecScope {
 
     val customerDAO: CustomerDAO = mock[CustomerDAO]
-    val customerService = new CustomerServiceImpl(customerDAO, sessionFactory)
+    val customerService = new CustomerServiceImpl(customerDAO)
 
   }
 

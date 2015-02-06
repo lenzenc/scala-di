@@ -6,12 +6,9 @@ import com.company.daos.CustomerDAO
 import com.company.models.Customer
 import com.company.services.CustomerService
 
-class CustomerServiceImpl(
-  val customerDAO: CustomerDAO,
-  val sessionFactory: SessionFactory)
-  extends CustomerService with DB
+class CustomerServiceImpl(val customerDAO: CustomerDAO)(implicit val sessionFactory: SessionFactory)
+  extends CustomerService
 {
-
   import sessionFactory._
 
   def list: List[Customer] = inSession { implicit session =>

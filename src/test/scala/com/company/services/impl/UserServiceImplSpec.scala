@@ -9,7 +9,7 @@ class UserServiceImplSpec extends ServiceSpec {
   trait MainScope extends ServiceSpecScope {
 
     val userDAO = mock[UserDAO]
-    val userService = new UserServiceImpl(userDAO, sessionFactory)
+    val userService = new UserServiceImpl(userDAO)
 
   }
 
